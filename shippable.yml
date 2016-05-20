@@ -7,6 +7,8 @@ env:
   - IMAGE_NAME=avinci/testdoc
 
 build:
+  cache: true
+
   ci:
     - sudo docker build -t=$IMAGE_NAME:$BRANCH.$SHIPPABLE_BUILD_NUMBER .
 
