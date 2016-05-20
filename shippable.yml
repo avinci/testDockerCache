@@ -9,8 +9,11 @@ env:
 build:
   cache: true
 
-  ci:
+  pre_ci:
     - sudo docker build -t=$IMAGE_NAME:$BRANCH.$SHIPPABLE_BUILD_NUMBER .
+
+  ci:
+    - pwd
 
   post_ci:
     - if [ "$IS_PULL_REQUEST" != true ]; then sudo docker push $IMAGE_NAME:$BRANCH.$SHIPPABLE_BUILD_NUMBER; fi
