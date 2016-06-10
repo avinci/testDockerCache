@@ -1,27 +1,8 @@
-language: node_js
-
-node_js:
-  - 0.10.24
-
-env:
-  - IMAGE_NAME=avinci/testdoc
+language: none
 
 build:
-  cache: true
-
   pre_ci:
-    - sudo docker build -t=$IMAGE_NAME:$BRANCH.$SHIPPABLE_BUILD_NUMBER .
+    - sudo docker pull elgalu/selenium:2.53.0o
 
   ci:
     - pwd
-
-  post_ci:
-    - if [ "$IS_PULL_REQUEST" != true ]; then sudo docker push $IMAGE_NAME:$BRANCH.$SHIPPABLE_BUILD_NUMBER; fi
-
-integrations:
-  hub:
-    - integrationName: "shipDH"
-      type: docker
-      branches:
-          only:
-            - master
